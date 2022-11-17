@@ -9,6 +9,7 @@ items:
     name: backend
   spec:
     containers:
+    - env:
       image: quay.io/rpatel0019/db_image
       name: backend
       ports:
