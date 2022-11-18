@@ -31,16 +31,15 @@ items:
     - name: backend-volume
       persistentVolumeClaim:
         claimName: backend-claim
-    '''initContainers:
-    - name: backend-ownership
-      image: quay.io/rpatel0019/db_image
-      # Give `mysql` user permissions a mounted volume
-      # https://stackoverflow.com/a/51195446/4360433
-
-      volumeMounts:
-      - name: backend-volume
-        mountPath: /var/lib/mysql  
-        '''  
+    #initContainers:
+    #- name: backend-ownership
+    #  image: quay.io/rpatel0019/db_image
+    #  # Give `mysql` user permissions a mounted volume
+    #  # https://stackoverflow.com/a/51195446/4360433
+    #  volumeMounts:
+    #  - name: backend-volume
+    #    mountPath: /var/lib/mysql  
+        
 - apiVersion: v1
   kind: Pod
   metadata:
