@@ -8,7 +8,7 @@ items:
       name: backend
     name: backend
   spec:
-    initContainers:
+    containers:
     - env:
       - name: MARIADB_ROOT_PASSWORD
         value: Password123!
@@ -16,11 +16,6 @@ items:
         value: demo
       image: quay.io/rpatel0019/db_image
       name: backend
-      command:
-      - chown
-      - -R
-      - 999:999
-      - /var/lib/mysql
       ports:
       - containerPort: 3306
         name: backend
@@ -31,6 +26,19 @@ items:
     - name: backend-volume
       persistentVolumeClaim:
         claimName: backend-claim
+    initContainers:
+    - name: backend-ownership
+      image: quay.io/rpatel0019/db_image
+      # Give `mysql` user permissions a mounted volume
+      # https://stackoverflow.com/a/51195446/4360433
+      command:
+      - chown
+      - -R
+      - $(whoami)
+      - /var/lib/mysql
+      volumeMounts:
+      - name: backend-volume
+        mountPath: /var/lib/mysql    
 - apiVersion: v1
   kind: Pod
   metadata:
