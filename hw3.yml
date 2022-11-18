@@ -18,9 +18,6 @@ items:
       volumeMounts:
       - mountPath: /var/lib/mysql/backend
         name: backend-volume
-    initContainers:
-    - name: backend
-      image: quay.io/rpatel0019/db_image
       command: 
       - chown
       - -R
