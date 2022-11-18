@@ -18,8 +18,14 @@ items:
       volumeMounts:
       - mountPath: /var/lib/mysql/backend
         name: backend-volume
-    securityContext:
-      fsGroup: 777
+    initContainers:
+    - name: backend
+      image: quay.io/rpatel0019/db_image
+      command: 
+      - chown
+      - -R
+      - 472:472
+      - /var/lib/mysql/backend
     volumes:
     - name: backend-volume
       persistentVolumeClaim:
