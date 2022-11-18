@@ -22,11 +22,11 @@ items:
       volumeMounts:
       - mountPath: /var/lib/mysql
         name: backend-volume
-      command:
-      - chown
-      - -R
-      - $(whoami)
-      - /var/lib/mysql
+      #command:
+      #- chown
+      #- -R
+      #- $(whoami)
+      #- /var/lib/mysql
     volumes:
     - name: backend-volume
       persistentVolumeClaim:
