@@ -51,7 +51,7 @@ items:
     containers:
     - env:
       - name: IP_ADDR
-        value: ${mariadb_ip_addr}
+        value: backend_SERVICE_HOST
       image: quay.io/rpatel0019/flask_image
       name: flask
       ports:
