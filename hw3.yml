@@ -4,25 +4,29 @@ items:
   kind: Pod
   metadata:
     labels:
-      app: hw3
+      app: application
       name: backend
     name: backend
   spec:
-    containers:
+    initContainers:
     - env:
+      - name: MARIADB_ROOT_PASSWORD
+        value: Password123!
+      - name: MARIADB_DATABASE
+        value: demo
       image: quay.io/rpatel0019/db_image
       name: backend
+      command:
+      - chown
+      - -R
+      - 999:999
+      - /var/lib/mysql
       ports:
       - containerPort: 3306
         name: backend
       volumeMounts:
-      - mountPath: /var/lib/root
+      - mountPath: /var/lib/mysql
         name: backend-volume
-      #command: 
-      #- chown
-      #- -R
-      #- 472:472
-      #- /var/lib/root
     volumes:
     - name: backend-volume
       persistentVolumeClaim:
@@ -31,7 +35,7 @@ items:
   kind: Pod
   metadata:
     labels:
-      app: hw3
+      app: application
       name: flask
     name: flask
   spec:
@@ -51,7 +55,7 @@ items:
   kind: Service
   metadata:
     labels:
-      app: hw3
+      app: application
       name: flask
     name: flask
   spec:
@@ -63,7 +67,7 @@ items:
   kind: Service
   metadata:
     labels: 
-      app: hw3
+      app: application
       name: backend
     name: backend
   spec:
@@ -75,7 +79,7 @@ items:
   kind: PersistentVolumeClaim
   metadata: 
     labels: 
-      app: hw3
+      app: application
     name: backend-claim
   spec:
     accessModes:
