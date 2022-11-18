@@ -16,13 +16,13 @@ items:
       - containerPort: 3306
         name: backend
       volumeMounts:
-      - mountPath: /var/lib/mysql/backend
+      - mountPath: /var/lib/root
         name: backend-volume
-      command: 
-      - chown
-      - -R
-      - 472:472
-      - /var/lib/mysql/backend
+      #command: 
+      #- chown
+      #- -R
+      #- 472:472
+      #- /var/lib/root
     volumes:
     - name: backend-volume
       persistentVolumeClaim:
