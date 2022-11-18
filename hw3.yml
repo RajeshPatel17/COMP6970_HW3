@@ -18,6 +18,8 @@ items:
       volumeMounts:
       - mountPath: /var/lib/mysql/backend
         name: backend-volume
+    securityContext:
+      fsGroup: 999
     volumes:
     - name: backend-volume
       persistentVolumeClaim:
